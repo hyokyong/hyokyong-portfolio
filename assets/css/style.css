@@ -233,6 +233,13 @@ h1.hero-title em {
 }
 .btn-outline:hover {
   border-color: var(--text);
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* HERO: GitHub처럼 btn만 가진 링크도 hover 시 아이콘+텍스트 강조 */
+.hero-actions a.btn:not(.btn-dark):not(.btn-outline):hover {
+  color: #49bf9d;
 }
 
 .btn-static {
