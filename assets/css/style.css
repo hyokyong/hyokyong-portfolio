@@ -179,9 +179,10 @@ h1.hero-title em {
   padding: 5px 12px;
   border-radius: 999px;
   letter-spacing: -0.1px;
-  border: 1px solid var(--border);
-  color: var(--muted);
+  border: 1px solid var(--subtle);
+  color: var(--text);
   background: var(--surface);
+  font-weight: 600;
 }
 
 .btn-icon {
@@ -611,11 +612,12 @@ footer {
 .modal {
   background: var(--surface);
   border-radius: 20px;
-  max-width: 600px;
-  width: 100%;
+  width: fit-content;
+  max-width: calc(100vw - 48px);
+  min-width: min(600px, calc(100vw - 48px));
   max-height: 88vh;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
   border: 1px solid var(--border);
   transform: translateY(20px);
   transition: transform 0.25s;
@@ -690,7 +692,8 @@ footer {
   padding: 4px 12px;
   border-radius: 20px;
   background: var(--bg);
-  color: var(--muted);
+  color: var(--text);
+  font-weight: 600;
   border: 1px solid var(--border);
 }
 .modal-desc {
@@ -698,6 +701,16 @@ footer {
   color: var(--muted);
   line-height: 1.5;
   /* font-weight: 400; */
+}
+
+/* 모달 내부 project-desc가 ul/li일 때 기본 스타일 */
+#m-desc ul.project-desc {
+  margin: 0;
+  padding-left: 18px;
+}
+#m-desc ul.project-desc li {
+  margin: 6px 0;
+  white-space: nowrap;
 }
 
 .modal-line-bullet {

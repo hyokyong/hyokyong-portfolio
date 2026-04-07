@@ -43,8 +43,8 @@ function openModal(id) {
   const title = root.querySelector(".project-title")?.textContent ?? "";
   const period = root.querySelector(".project-period")?.textContent ?? "";
 
-  const descHtml = root.querySelector(".project-desc")?.innerHTML ?? "";
-  const impactHtml = root.querySelector(".project-impact")?.innerHTML ?? "";
+  const descEl = root.querySelector(".project-desc");
+  const descHtml = descEl?.outerHTML ?? "";
 
   const tags = Array.from(root.querySelectorAll(".project-tag")).map(
     (el) => escapeHtml(el.textContent),
@@ -57,33 +57,8 @@ function openModal(id) {
     .join("");
 
   const mDescEl = document.getElementById("m-desc");
-  mDescEl.innerHTML = addBrBullets(descHtml);
-
-  // desc 아래에 "기여및성과" 섹션 추가(중복 삽입 방지)
-  const existingImpactTitle = document.getElementById("m-impact-title");
-  const existingImpactDesc = document.getElementById("m-impact-desc");
-  if (existingImpactTitle) existingImpactTitle.remove();
-  if (existingImpactDesc) existingImpactDesc.remove();
-
-  const impactTitle = document.createElement("p");
-  impactTitle.className = "modal-section-title";
-  impactTitle.id = "m-impact-title";
-  impactTitle.textContent = "기여및성과";
-
-  const impactDesc = document.createElement("p");
-  impactDesc.className = "modal-desc";
-  impactDesc.id = "m-impact-desc";
-  impactDesc.innerHTML =
-    impactHtml && impactHtml.trim()
-      ? impactHtml
-      : "기여 및 성과를 입력하세요.";
-
-  if (impactHtml && impactHtml.trim()) {
-    impactDesc.innerHTML = addBrBullets(impactHtml);
-  }
-
-  mDescEl.insertAdjacentElement("afterend", impactTitle);
-  impactTitle.insertAdjacentElement("afterend", impactDesc);
+  // project-desc는 div 또는 ul로 올 수 있음. ul/li는 그대로 렌더링.
+  mDescEl.innerHTML = descEl?.tagName === "DIV" ? addBrBullets(descHtml) : descHtml;
   document.getElementById("modal-overlay").classList.add("open");
   document.body.style.overflow = "hidden";
 }
